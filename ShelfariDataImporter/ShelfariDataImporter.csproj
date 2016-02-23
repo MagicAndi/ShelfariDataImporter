@@ -75,6 +75,8 @@
     <Compile Include="CommandLineArgs.cs" />
     <Compile Include="DataImporter.cs" />
     <Compile Include="EntityFramework\DbContextExtension.cs" />
+    <Compile Include="Model\Book.cs" />
+    <Compile Include="Model\ListExtensions.cs" />
     <Compile Include="Model\ShelfariModel.cs" />
     <Compile Include="Model\ShelfariRecord.cs" />
     <Compile Include="Model\ShelfariRecordMap.cs" />
@@ -93,7 +95,9 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="SQL\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

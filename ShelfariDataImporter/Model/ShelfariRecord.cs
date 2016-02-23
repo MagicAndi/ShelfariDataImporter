@@ -18,34 +18,34 @@ namespace ShelfariDataImporter.Model
         public string Title { get; set; }
         public string AdditionalAuthors { get; set; }
         public string ISBN { get; set; }
-        public string MyRating { get; set; }
+        public int MyRating { get; set; }
         public string Publisher { get; set; }
         public string Binding { get; set; }
-        public string YearPublished { get; set; }
-        public string DateRead { get; set; }
-        public string DateAdded { get; set; }
+        public int YearPublished { get; set; }
+        public DateTime? DateRead { get; set; }
+        public DateTime DateAdded { get; set; }
         public string Bookshelves { get; set; }
         public string MyReview { get; set; }
         public string Author { get; set; }
-        public string Owned { get; set; }
-        public string Favorite { get; set; }
-        public string Wishlist { get; set; }
-        public string PlanToRead { get; set; }
-        public string CurrentlyReading { get; set; }
-        public string Read { get; set; }
+        public bool Owned { get; set; }
+        public bool Favorite { get; set; }
+        public bool Wishlist { get; set; }
+        public bool PlanToRead { get; set; }
+        public bool CurrentlyReading { get; set; }
+        public bool Read { get; set; }
         public string ASIN { get; set; }
-        public string ShelfariEditionId { get; set; }
-        public string ShelfariBookId { get; set; }
+        public int ShelfariEditionId { get; set; }
+        public int ShelfariBookId { get; set; }
         public string Condition { get; set; }
         public string OriginalPurchaseDate { get; set; }
-        public string PurchasePrice { get; set; }
+        public double PurchasePrice { get; set; }
         public string PrivateNotes { get; set; }
-        public string Signed { get; set; }
-        public string Loaned { get; set; }
+        public bool Signed { get; set; }
+        public bool Loaned { get; set; }
         public string LoanedTo { get; set; }
         public string LoanedOn { get; set; }
         public string LoanDue { get; set; }
-        public string IsPrivate { get; set; }
+        public bool IsPrivate { get; set; }
 
         #endregion
 
@@ -96,6 +96,48 @@ namespace ShelfariDataImporter.Model
             details.Append(string.Format(", Read: '{0}'", this.Read));
 
             return details.ToString();
+        }
+
+        public string GetOutputRecord()
+        {
+            var output = new StringBuilder();
+            var separator = "\t";
+
+            output.Append(Title);
+            output.Append(separator);
+            output.Append(Author);
+            output.Append(separator);
+            output.Append(AdditionalAuthors);
+            output.Append(separator);
+            output.Append(MyRating);
+            output.Append(separator);
+            output.Append(DateAdded);
+            output.Append(separator);
+            output.Append(DateRead);
+            output.Append(separator);
+
+            if (DateRead.HasValue)
+            {
+                output.Append(DateRead.Value.ToString("yyyy"));
+            }
+            else
+            {
+                output.Append(string.Empty);
+            }
+            output.Append(separator);
+
+            output.Append(Bookshelves);
+            output.Append(separator);
+            output.Append(MyReview);
+            output.Append(separator);
+            output.Append(PlanToRead);
+            output.Append(separator);
+            output.Append(CurrentlyReading);
+            output.Append(separator);
+            output.Append(Read);
+            output.Append(separator);
+
+            return output.ToString();;
         }
 
         #endregion

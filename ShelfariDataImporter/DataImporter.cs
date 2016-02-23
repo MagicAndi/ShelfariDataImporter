@@ -18,6 +18,7 @@ namespace ShelfariDataImporter
         #region Private Data
 
         private string inputFilePath;
+        private string outputFolder;
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         #endregion
@@ -28,9 +29,15 @@ namespace ShelfariDataImporter
 
         #region Constructor
 
-        public DataImporter(string filePath)
+        public DataImporter(string filePath, string outputDirectory)
         {
             inputFilePath = filePath;
+            outputFolder = outputDirectory;
+
+            if (!outputFolder.EndsWith("\\"))
+            {
+                outputFolder += "\\";
+            }
         }
 
         #endregion
@@ -58,11 +65,30 @@ namespace ShelfariDataImporter
                         }
                     }
                 }
-                               
-                using (var dbContext = new Model.ShelfariModel())
+
+                //using (var dbContext = new Model.ShelfariModel())
+                //{
+                //    dbContext.Books.AddRange(records);
+                //    dbContext.SaveChanges();
+                //}
+
+
+                var readRecords = records.Where(b => b.Read = true).ToList<ShelfariRecord>();
+                var readBooks = readRecords.ConvertToBooks();
+                readBooks = readBooks.OrderByDescending(b => b.DateRead).ToList();
+
+                using (TextWriter writer = File.CreateText(@"C:\Users\MagicAndi\Dropbox\Backups\Shelfari\Read.csv"))
                 {
-                    dbContext.Books.AddRange(records);
-                    dbContext.SaveChanges();
+                    using (var csv = new CsvWriter(writer))
+                    {
+                        // csv.WriteRecords(records);
+                        csv.Configuration.Encoding = Encoding.UTF8;
+                        csv.WriteHeader<Book>();
+                        foreach (var record in readBooks)
+                        {
+                            csv.WriteRecord(record);
+                        }
+                    }
                 }
 
                 logger.Info(string.Format("Successfully imported {0} records.", records.Count));
