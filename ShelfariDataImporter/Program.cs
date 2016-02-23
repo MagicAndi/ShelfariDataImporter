@@ -89,7 +89,7 @@ namespace ShelfariDataImporter
         /// <param name="e">The <see cref="UnhandledExceptionEventArgs"/> instance containing the event data.</param>
         static void UnhandledExceptionTrapper(object sender, UnhandledExceptionEventArgs e)
         {
-            logger.Error("An unhandled exception has occurred", (Exception)e.ExceptionObject);
+            logger.Error((Exception)e.ExceptionObject, "An unhandled exception has occurred");
             DisplayExitPrompt();
             Environment.Exit(1);
         }

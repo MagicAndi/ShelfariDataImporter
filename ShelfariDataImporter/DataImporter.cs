@@ -7,7 +7,9 @@ using System.IO;
 using CsvHelper;
 using NLog;
 
+using ShelfariDataImporter.EntityFramework;
 using ShelfariDataImporter.Model;
+using ShelfariDataImporter.Utilities;
 
 namespace ShelfariDataImporter
 {
@@ -37,6 +39,9 @@ namespace ShelfariDataImporter
 
         public void Import()
         {
+            const string methodName = "Import";
+            logger.Trace(LogHelper.BuildMethodEntryTrace(methodName));
+
             try
             {
                 var records = new List<ShelfariRecord>();
@@ -47,37 +52,29 @@ namespace ShelfariDataImporter
                     {
                         using (var csv = new CsvReader(reader))
                         {
-                            // csv.Configuration.RegisterClassMap<ShelfariRecordMap>();
+                            csv.Configuration.RegisterClassMap<ShelfariRecordMap>();
                             csv.Configuration.IgnoreHeaderWhiteSpace = true;
                             records = csv.GetRecords<ShelfariRecord>().ToList();
                         }
-
-                        //while (csv.Read())
-                        //{
-                        //    //var bookTitle = csv.GetField(0);
-                        //    //Console.WriteLine(bookTitle);
-                        //    var record = csv.GetRecord<ShelfariRecord>();
-                        //    logger.Info(record.ToString());
-                        //    records.Add(record);
-                        //}
                     }
+                }
+                               
+                using (var dbContext = new Model.ShelfariModel())
+                {
+                    dbContext.Books.AddRange(records);
+                    dbContext.SaveChanges();
                 }
 
                 logger.Info(string.Format("Successfully imported {0} records.", records.Count));
-
-                var sortedRecords = records.OrderByDescending(o => o.DateAdded).ToList();
-
-                foreach (var record in sortedRecords)
-                {
-                    logger.Info(record.GetDetails());
-                }
             }
             catch (Exception ex)
             {
                 logger.Error(ex, string.Format("Error importing file '{0}': {1}.", inputFilePath, ex.Message));
             }
-        }
 
+            logger.Trace(LogHelper.BuildMethodExitTrace(methodName));
+        }
+        
         private bool IsValidFile()
         {
             bool isValid = false;
@@ -90,7 +87,16 @@ namespace ShelfariDataImporter
             return isValid;
         }
 
-
+        private void TruncateTables()
+        {
+            using (var dbContext = new Model.ShelfariModel())
+            {
+                var tablesToDelete = new string[] { "ShelfariRecords" };
+                dbContext.Truncates(tablesToDelete);
+                logger.Info("Successfully truncated tables in Shelfari database.");
+            }
+        }
+        
         #endregion
     }
 }

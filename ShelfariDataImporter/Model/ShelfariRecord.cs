@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ShelfariDataImporter.Model
 {
@@ -13,6 +14,7 @@ namespace ShelfariDataImporter.Model
     {
         #region Public Properties
 
+        public int ID { get; set; }
         public string Title { get; set; }
         public string AdditionalAuthors { get; set; }
         public string ISBN { get; set; }
@@ -44,6 +46,14 @@ namespace ShelfariDataImporter.Model
         public string LoanedOn { get; set; }
         public string LoanDue { get; set; }
         public string IsPrivate { get; set; }
+
+        #endregion
+
+        #region Constructor(s)
+
+        public ShelfariRecord()
+        {
+        }
 
         #endregion
 
