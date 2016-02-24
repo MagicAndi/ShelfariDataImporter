@@ -53,7 +53,7 @@ namespace ShelfariDataImporter
             }
 
             // Process command line arguments
-            var importer = new DataImporter(cmdLineArgs.InputFile, string.Empty);
+            var importer = new DataImporter(cmdLineArgs.InputFile, cmdLineArgs.OutputFolder);
             importer.Import();
             
             // Clean-up           

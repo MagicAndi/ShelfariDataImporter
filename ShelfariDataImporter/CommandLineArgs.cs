@@ -14,10 +14,14 @@ namespace ShelfariDataImporter
     {
         #region Public Properties
 
-        [CmdLineArg(Alias = "f", Required = true)]
+        [CmdLineArg(Alias = "i", Required = true)]
         [Description("Absolute path of the input file to be processed.")]
         public string InputFile { get; set; }
-                
+
+        [CmdLineArg(Alias = "o", Required = true)]
+        [Description("Absolute path of the output directory.")]
+        public string OutputFolder { get; set; }
+
         [CmdLineArg(Alias = "v", Required = false)]
         [Description("Prints all messages to standard output.")]
         public bool Verbose { get; set; }
