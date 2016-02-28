@@ -20,8 +20,6 @@ namespace ShelfariDataImporter
 
         public ApplicationConfiguration()
         {
-            //ApplicationTitle = "Base Console Application";
-            //DisplayExitPrompt = false;
         }
 
         #endregion        
