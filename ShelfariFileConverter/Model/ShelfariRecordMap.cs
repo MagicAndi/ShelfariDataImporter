@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using CsvHelper;
 using CsvHelper.Configuration;
 
-namespace ShelfariDataImporter.Model
+namespace ShelfariFileConverter.Model
 {
     public class ShelfariRecordMap : CsvClassMap<ShelfariRecord>
     {

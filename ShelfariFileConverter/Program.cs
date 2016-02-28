@@ -9,26 +9,34 @@ using NLog;
 using BizArk.Core.CmdLine;
 using System.IO;
 
-namespace ShelfariDataImporter
+namespace ShelfariFileConverter
 {
     class Program
     {
+        #region Private Static Data
+
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        public static string ApplicationTitle
+        #endregion
+
+        #region Private Static Properties
+
+        private static string ApplicationTitle
         {
             get { return AppScope.Configuration.ApplicationTitle; }
         }
 
-        public static string Version
+        private static string Version
         {
             get { return Assembly.GetExecutingAssembly().GetName().Version.ToString(); }
         }
 
-        public static string ApplicationTitleAndVersion
+        private static string ApplicationTitleAndVersion
         {
             get { return string.Format("{0} - Version {1}", ApplicationTitle, Version); }
         }
+
+        #endregion
 
         /// <summary>
         /// Main entry point for console application.
@@ -55,8 +63,6 @@ namespace ShelfariDataImporter
             // Process command line arguments
             var converter = new FileConverter(cmdLineArgs.InputFile, cmdLineArgs.OutputFile);
             converter.ConvertFile();
-            
-            // Clean-up           
 
             // Exit
             DisplayExitPrompt();

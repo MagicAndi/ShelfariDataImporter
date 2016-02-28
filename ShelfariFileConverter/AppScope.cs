@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ShelfariDataImporter
+﻿namespace ShelfariFileConverter
 {
     public class AppScope
     {
@@ -17,8 +11,6 @@ namespace ShelfariDataImporter
             /// Load the properties from the Config store
             Configuration = new ApplicationConfiguration();
             Configuration.Initialize();
-
         }
-
     }
 }

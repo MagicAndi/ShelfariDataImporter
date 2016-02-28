@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ShelfariDataImporter.Model
+namespace ShelfariFileConverter.Model
 {
     /// <summary>
     /// A POCO class to hold the Shelfari record data

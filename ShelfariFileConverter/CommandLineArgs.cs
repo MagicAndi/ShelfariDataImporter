@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using BizArk.Core;
-using BizArk.Core.CmdLine;
 using System.IO;
 
-namespace ShelfariDataImporter
+using BizArk.Core.CmdLine;
+
+namespace ShelfariFileConverter
 {
     public class CommandLineArgs : CmdLineObject
     {

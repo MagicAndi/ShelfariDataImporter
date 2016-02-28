@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ShelfariDataImporter.Model
+namespace ShelfariFileConverter.Model
 {
     public class Book
     {

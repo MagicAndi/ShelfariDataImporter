@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShelfariDataImporter.Utilities
+namespace ShelfariFileConverter.Utilities
 {
     /// <summary>
     /// Static class to hold helper methods to help with logging

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Westwind.Utilities.Configuration;
+﻿using Westwind.Utilities.Configuration;
 
-namespace ShelfariDataImporter
+namespace ShelfariFileConverter
 {
     public class ApplicationConfiguration : AppConfiguration
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShelfariDataImporter.Model
+namespace ShelfariFileConverter.Model
 {
     /// <summary>
     /// Holds extension methods for the various list collections

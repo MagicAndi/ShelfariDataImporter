@@ -1,19 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
+using System.Linq;
+
 using CsvHelper;
 using NLog;
-
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 
-using ShelfariDataImporter.Model;
-using ShelfariDataImporter.Utilities;
+using ShelfariFileConverter.Model;
+using ShelfariFileConverter.Utilities;
 
-namespace ShelfariDataImporter
+namespace ShelfariFileConverter
 {
     public class FileConverter
     {
@@ -24,11 +22,7 @@ namespace ShelfariDataImporter
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         #endregion
-
-        #region Public Properties
-
-        #endregion
-
+        
         #region Constructor
 
         public FileConverter(string inputFile, string outputFile)
@@ -41,11 +35,6 @@ namespace ShelfariDataImporter
                 throw new ArgumentException(string.Format("The input file '{0}' does not exist.", inputFile), "filePath");
             }
 
-            if (File.Exists(outputFile))
-            {
-                File.Delete(outputFile);
-            }
-
             inputFilePath = inputFile;
             outputFilePath = outputFile;
             
@@ -54,7 +43,7 @@ namespace ShelfariDataImporter
 
         #endregion
 
-        #region Methods
+        #region Public Methods
 
         public void ConvertFile()
         {
@@ -104,6 +93,10 @@ namespace ShelfariDataImporter
 
             logger.Trace(LogHelper.BuildMethodExitTrace(methodName));
         }
+
+        #endregion
+
+        #region Private Methods
 
         private void CreateBooksToReadSheet(List<ShelfariRecord> booksToRead, ExcelPackage package)
         {
