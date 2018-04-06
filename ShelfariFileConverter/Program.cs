@@ -17,7 +17,7 @@ namespace ShelfariFileConverter
 
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        #endregion
+        #endregion 
 
         #region Private Static Properties
 
